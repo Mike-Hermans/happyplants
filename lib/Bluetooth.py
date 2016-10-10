@@ -1,7 +1,8 @@
 from Database import *
 import bluetooth
 
-class Bluetooth():
+
+class Bluetooth:
     def __init__(self):
         print "BT started"
 
@@ -14,10 +15,10 @@ class Bluetooth():
 
     def connect(self, device):
         socket = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
-        device.socket = socket.connect((device.addr, 1))
+        socket.connect((device.addr, 1))
         db = Database()
         db.save_btdevice(device)
-        return device
+        return socket
 
     def command(self, socket, command):
         socket.send(command)
@@ -27,4 +28,4 @@ class Bluetooth():
             returndata.append(data)
             if '$' in data:
                 break
-        return  ''.join(returndata).replace('$', '').split()
+        return ''.join(returndata).replace('$', '').split()

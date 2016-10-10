@@ -1,6 +1,7 @@
 from lib import *
 
-class Main():
+
+class Main:
     btdevice = Device()
     bt = Bluetooth()
     db = Database()
@@ -10,10 +11,11 @@ class Main():
         print "HappyPlants main module"
         print "Looking for saved devices"
         devices = self.db.get_btdevices()
-        for device in devices:
-            print "Connecting to %s (%s)" % (device.name, device.addr)
-            device.sock = self.bt.connect(device)
-            self.connecteddevices.append(device)
+        if devices:
+            for device in devices:
+                print "Connecting to %s (%s)" % (device.name, device.addr)
+                device.sock = self.bt.connect(device)
+                self.connecteddevices.append(device)
         self.main()
 
     def main(self):
@@ -22,9 +24,9 @@ class Main():
         print "2. Database"
         option = raw_input("Select an option: ")
 
-        if (option == "1"):
+        if (option=="1"):
             self.bluetooth()
-        if (option == "2"):
+        if (option=="2"):
             self.database()
         else:
             self.main()
@@ -69,7 +71,7 @@ class Main():
                 print "%s registered devices:" % len(self.connecteddevices)
                 for device in self.connecteddevices:
                     i += 1
-                    print "[%s] (%s) %s" % (i, device.addr, device.name)
+                    #print "[%s] (%s) %s" % (i, device.addr, device.name)
                     print device
                 print "[Q] quit"
                 print "SELECTING A DEVICE WILL DISCONNECT IT"
