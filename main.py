@@ -59,8 +59,7 @@ class Main:
                 self.btdevice = devices[int(option) - 1]
 
                 self.btdevice = self.bt.connect(self.btdevice)
-                print 'received socket'
-                data = self.bt.command(self.btdevice, '3')
+                data = self.bt.command(self.btdevice, '2')
                 print data
             else:
                 print "No devices found"
@@ -71,8 +70,7 @@ class Main:
                 print "%s registered devices:" % len(self.connecteddevices)
                 for device in self.connecteddevices:
                     i += 1
-                    #print "[%s] (%s) %s" % (i, device.addr, device.name)
-                    print device
+                    print "[%s] (%s) %s" % (i, device.addr, device.name)
                 print "[Q] quit"
                 print "SELECTING A DEVICE WILL DISCONNECT IT"
                 option = raw_input("Select an option: ")
@@ -103,7 +101,7 @@ class Main:
 
         option = raw_input("Select option: ")
         if option == "1":
-            self.db.get_btdevices(addr='98:D3:31:FC:31:A4')
+            self.db.get_btdevices()
         self.main()
 
 if __name__ == '__main__':
