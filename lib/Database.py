@@ -43,3 +43,7 @@ class Database:
         if self.cur.rowcount == 0:
             self.cur.execute("INSERT INTO btdevices(address, nicename) VALUES('%s', '%s')" % (device.addr, device.name))
             self.db.commit()
+
+    def remove_btdevice(self, device):
+        self.cur.execute("DELETE FROM btdevices WHERE address=%s", device.addr)
+        self.db.commit()

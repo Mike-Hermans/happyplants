@@ -2,7 +2,6 @@ from lib import *
 
 
 class Main:
-    btdevice = Device()
     bt = Bluetooth()
     db = Database()
     connecteddevices = []
@@ -14,7 +13,7 @@ class Main:
         if devices:
             for device in devices:
                 print "Connecting to %s (%s)" % (device.name, device.addr)
-                device.sock = self.bt.connect(device)
+                device.connect(self.bt.connect(device))
                 self.connecteddevices.append(device)
         self.main()
 
@@ -22,6 +21,7 @@ class Main:
         print "Options:"
         print "1. Bluetooth"
         print "2. Database"
+        print "3. Planters"
         option = raw_input("Select an option: ")
 
         if (option=="1"):
@@ -37,6 +37,7 @@ class Main:
         print "1. Connect to device"
         print "2. View connected devices"
         print "3. View registered devices"
+        print "4. Send command"
         option = raw_input("Select option: ")
         if option == "1":
             print "Scanning for devices..."
@@ -51,31 +52,36 @@ class Main:
                 print "[R] rescan"
                 print "[Q] quit"
 
-                option = raw_input("Bluetooth device: ")
-                if option == "r":
+                option_device = raw_input("Bluetooth device: ")
+                if option_device == "r":
                     self.bluetooth()
-                elif option == "q":
+                elif option_device == "q":
                     return
-                self.btdevice = devices[int(option) - 1]
+                btdevice = devices[int(option_device) - 1]
 
-                self.btdevice = self.bt.connect(self.btdevice)
-                data = self.bt.command(self.btdevice, '2')
-                print data
+                btdevice.connect(self.bt.connect(btdevice))
+                self.connecteddevices.append(btdevice)
             else:
                 print "No devices found"
 
         if option == "2":
             if len(self.connecteddevices) > 0:
                 i = 0
-                print "%s registered devices:" % len(self.connecteddevices)
+                print "%s connected devices:" % len(self.connecteddevices)
                 for device in self.connecteddevices:
                     i += 1
                     print "[%s] (%s) %s" % (i, device.addr, device.name)
                 print "[Q] quit"
                 print "SELECTING A DEVICE WILL DISCONNECT IT"
                 option = raw_input("Select an option: ")
-                if 0 < option <= i:
-                    print "--Remove device here--"
+                try:
+                    if 0 < int(option) <= i:
+                        self.connecteddevices[i-1].disconnect()
+                        del self.connecteddevices[i-1]
+                except:
+                    print "Nothing selected"
+            else:
+                print "There are no devices connected"
 
         if option == "3":
             devices = self.db.get_btdevices()
@@ -88,10 +94,16 @@ class Main:
                 print "[Q] quit"
                 print "SELECTING A DEVICE WILL REMOVE IT"
                 option = raw_input("Select an option: ")
-                if 0 < option <= i:
-                    print "--Remove device here--"
+                if 0 < int(option) <= i:
+                    self.db.remove_btdevice(devices[i-1])
             else:
                 print "No devices found"
+
+        if option == "4":
+            if len(self.connecteddevices) > 0:
+                command = raw_input("Type a command to send: ")
+                for device in self.connecteddevices:
+                    print self.bt.command(device.sock, command)
         self.main()
 
     def database(self):
