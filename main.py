@@ -36,8 +36,7 @@ class Main:
         print "Bluetooth functions"
         print "1. Connect to device"
         print "2. View connected devices"
-        print "3. View registered devices"
-        print "4. Send command"
+        print "3. Send command"
         option = raw_input("Select option: ")
         if option == "1":
             print "Scanning for devices..."
@@ -84,6 +83,20 @@ class Main:
                 print "There are no devices connected"
 
         if option == "3":
+            if len(self.connecteddevices) > 0:
+                command = raw_input("Type a command to send: ")
+                for device in self.connecteddevices:
+                    print self.bt.command(device.sock, command)
+        self.main()
+
+    def database(self):
+        print "------------------"
+        print "Database functions"
+        print "1. Show saved devices"
+
+        option = raw_input("Select option: ")
+
+        if option == "1":
             devices = self.db.get_btdevices()
             if len(devices) > 0:
                 i = 0
@@ -98,22 +111,6 @@ class Main:
                     self.db.remove_btdevice(devices[i-1])
             else:
                 print "No devices found"
-
-        if option == "4":
-            if len(self.connecteddevices) > 0:
-                command = raw_input("Type a command to send: ")
-                for device in self.connecteddevices:
-                    print self.bt.command(device.sock, command)
-        self.main()
-
-    def database(self):
-        print "------------------"
-        print "Database functions"
-        print "1. Show saved devices"
-
-        option = raw_input("Select option: ")
-        if option == "1":
-            self.db.get_btdevices()
         self.main()
 
 if __name__ == '__main__':
