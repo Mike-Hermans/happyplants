@@ -37,7 +37,8 @@ void loop() {
       digitalWrite(13, HIGH);
       String temp = String(thermocouple.readCelsius());
       String light = String(analogRead(lightPin));
-      BT.println(temp + " " + light + "$");
+      String moist = String(analogRead(moistPin));
+      BT.println(temp + " " + light + " " + moist + "$");
       digitalWrite(13, LOW);
     }
   }
