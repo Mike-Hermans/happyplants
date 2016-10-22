@@ -1,6 +1,12 @@
+"""
+The class containing the application's image information.
+Contains all images that can be used in the application.
+
+Author:         Michelle Ritzema
+Last modified:  22 October 2016
+"""
 
 
-# Contains all images that can be used in the application.
 class ApplicationImages(object):
 
     def __init__(self):

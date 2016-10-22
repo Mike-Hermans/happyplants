@@ -1,6 +1,12 @@
+"""
+The class containing the application's button information.
+Contains all buttons that can be used in the application.
+
+Author:         Michelle Ritzema
+Last modified:  22 October 2016
+"""
 
 
-# Contains all button images that can be used in the application.
 class ApplicationButtons(object):
 
     def __init__(self):

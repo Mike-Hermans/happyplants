@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 """
-The main screen of the HappyPlants application.
-Here the user sees a global overview of all the plant boxes.
+The main class of the HappyPlants application. Here the application
+gets started and all important functions, like navigation, is handled.
 
 Author:         Michelle Ritzema
 Last modified:  22 October 2016
@@ -11,95 +11,44 @@ Last modified:  22 October 2016
 
 import sys
 
-from Tkinter import Tk, Frame, Canvas, Label, Button, INSIDE
+from Tkinter import Tk, Frame, INSIDE
 from PIL import Image, ImageTk
-from data import ApplicationImages, ApplicationButtons
 from views import ImageButton as iButton
+from screens import SplashScreen, TestScreen, MainScreen
 
 TITLE_FONT = ("Helvetica", 18, "bold")
 
 
+# The main function of the application, that starts up everything needed.
 class Main(Tk):
-
     def __init__(self, *args, **kwargs):
         Tk.__init__(self, *args, **kwargs)
         make_full_screen(self)
-        # The container is where we'll stack a bunch of frames on top of each other,
-        # then the one we want visible will be raised above the others
         container = Frame(self)
         container.pack(side="top", fill="both", expand=True)
         container.grid_rowconfigure(0, weight=1)
         container.grid_columnconfigure(0, weight=1)
         self.frames = {}
-        for frame in (SplashScreen, PageOne, PageTwo):
+        self.initialize_frames(container)
+        self.show_frame("SplashScreen")
+
+    # Puts a stack of frames on top of each other.
+    def initialize_frames(self, container):
+        application_frames = [SplashScreen.SplashScreen, TestScreen.TestScreen, MainScreen.MainScreen]
+        for frame in application_frames:
             page_name = frame.__name__
             frame = frame(parent=container, controller=self)
             self.frames[page_name] = frame
-            # Put all of the pages in the same location; the one on the top of
-            # the stacking order will be the one that is visible.
             frame.grid(row=0, column=0, sticky="nsew")
-        self.show_frame("SplashScreen")
 
-    # Show a frame for the given page name
+    # Show a frame for the given page name by raising it above the other frames
     def show_frame(self, page_name):
         frame = self.frames[page_name]
         frame.tkraise()
 
 
-# Creates the beginning screen.
-# Draws a frame for the buttons, And a canvas with images.
-class SplashScreen(Frame):
-    def __init__(self, parent, controller):
-        Frame.__init__(self, parent)
-        self.controller = controller
-
-        screen_width, screen_height = self.winfo_screenwidth(), self.winfo_screenheight()
-        application_images = ApplicationImages.ApplicationImages()
-        application_images.add_images(screen_width, screen_height)
-        images = application_images.images_dictionary
-        application_buttons = ApplicationButtons.ApplicationButtons()
-        application_buttons.add_buttons()
-        buttons = application_buttons.button_dictionary
-
-        canvas = Canvas(self, width=screen_width, height=screen_height)
-        canvas.pack(side="top", fill="x", pady=10)
-
-        needed_images = ["img_background", "img_main_title", "img_main_plant"]
-        collected_images = collect_images(self, images, needed_images)
-        populate_canvas(canvas, collected_images)
-
-        image_button = iButton.ImageButton(canvas).create_button(buttons["btn_start_yellow"], self.controller, "PageOne")
-        image_button.pack()
-        image_button.place(bordermode=INSIDE, x=int(screen_width - 320), y=int(screen_height - 120))
-
-        image_button = iButton.ImageButton(canvas).create_button(buttons["btn_start_green"], self.controller, "PageTwo")
-        image_button.pack()
-        image_button.place(bordermode=INSIDE, x=int(20), y=int(screen_height - 120))
-
-
-class PageOne(Frame):
-
-    def __init__(self, parent, controller):
-        Frame.__init__(self, parent)
-        self.controller = controller
-        label = Label(self, text="This is page 1", font=TITLE_FONT)
-        label.pack(side="top", fill="x", pady=10)
-        button = Button(self, text="Go to the start page", command=lambda: controller.show_frame("SplashScreen"))
-        button.pack()
-
-
-class PageTwo(Frame):
-
-    def __init__(self, parent, controller):
-        Frame.__init__(self, parent)
-        self.controller = controller
-        label = Label(self, text="This is page 2", font=TITLE_FONT)
-        label.pack(side="top", fill="x", pady=10)
-        button = Button(self, text="Go to the start page", command=lambda: controller.show_frame("SplashScreen"))
-        button.pack()
-
-
-# Make the window cover the entire screen
+# Makes the application window cover the entire screen
+# noinspection SpellCheckingInspection
 def make_full_screen(root):
     root.attributes('-fullscreen', True)
 
@@ -123,17 +72,28 @@ def collect_images(root, images, needed_images):
     return collected_images
 
 
-def populate_canvas(canvas, images):
+# Populates the canvas with all needed images.
+def populate_canvas_images(canvas, images):
     for image in range(len(images)):
         canvas.create_image(images[image][1], images[image][2], image=images[image][0])
 
 
+# Populates the canvas with all needed buttons.
+def populate_canvas_buttons(canvas, buttons, needed_buttons, controller):
+    for button in needed_buttons:
+        image_button = iButton.ImageButton(canvas).create_button(buttons[button[0]], controller, button[1])
+        image_button.pack()
+        image_button.place(bordermode=INSIDE, x=button[2], y=button[3])
+
+
+# Prints out a test message.
 def button_hello(event):
     print "Start new screen..."
     print event
 
 
-def button_quit(event):
+# Quits the current application.
+def quit_application(event):
     print "Exiting now"
     print event
     sys.exit()
