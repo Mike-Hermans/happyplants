@@ -20,14 +20,14 @@ class Main(Tk):
         container.grid_rowconfigure(0, weight=1)
         container.grid_columnconfigure(0, weight=1)
         self.frames = {}
-        for frame in (SplashPage, PageOne, PageTwo):
+        for frame in (SplashScreen, PageOne, PageTwo):
             page_name = frame.__name__
             frame = frame(parent=container, controller=self)
             self.frames[page_name] = frame
             # Put all of the pages in the same location; the one on the top of
             # the stacking order will be the one that is visible.
             frame.grid(row=0, column=0, sticky="nsew")
-        self.show_frame("SplashPage")
+        self.show_frame("SplashScreen")
 
     # Show a frame for the given page name
     def show_frame(self, page_name):
@@ -35,17 +35,19 @@ class Main(Tk):
         frame.tkraise()
 
 
-class SplashPage(Frame):
-
+class SplashScreen(Frame):
     def __init__(self, parent, controller):
         Frame.__init__(self, parent)
         self.controller = controller
-        #label = Label(self, text="This is the start page", font=TITLE_FONT)
-        #label.pack(side="top", fill="x", pady=10)
-        #button1 = Button(self, text="Go to Page One", command=lambda: controller.show_frame("PageOne"))
-        #button2 = Button(self, text="Go to Page Two",  command=lambda: controller.show_frame("PageTwo"))
-        #button1.pack()
-        #button2.pack()
+
+        '''
+        label = Label(self, text="This is the start page", font=TITLE_FONT)
+        label.pack(side="top", fill="x", pady=10)
+        button1 = Button(self, text="Go to Page One", command=lambda: controller.show_frame("PageOne"))
+        button2 = Button(self, text="Go to Page Two",  command=lambda: controller.show_frame("PageTwo"))
+        button1.pack()
+        button2.pack()
+        '''
 
         screen_width, screen_height = self.winfo_screenwidth(), self.winfo_screenheight()
         application_images = ApplicationImages.ApplicationImages()
@@ -62,11 +64,11 @@ class SplashPage(Frame):
         collected_images = collect_images(self, images, needed_images)
         populate_canvas(canvas, collected_images)
 
-        image_button = iButton.ImageButton(canvas).create_button(buttons["btn_start_yellow"], button_hello, button_quit)
+        image_button = iButton.ImageButton(canvas).create_button(buttons["btn_start_yellow"], self.controller, "PageOne")
         image_button.pack()
         image_button.place(bordermode=INSIDE, x=int(screen_width - 320), y=int(screen_height - 120))
 
-        image_button = iButton.ImageButton(canvas).create_button(buttons["btn_start_green"], button_hello, button_quit)
+        image_button = iButton.ImageButton(canvas).create_button(buttons["btn_start_green"], self.controller, "PageTwo")
         image_button.pack()
         image_button.place(bordermode=INSIDE, x=int(20), y=int(screen_height - 120))
 
@@ -118,7 +120,7 @@ class PageOne(Frame):
         self.controller = controller
         label = Label(self, text="This is page 1", font=TITLE_FONT)
         label.pack(side="top", fill="x", pady=10)
-        button = Button(self, text="Go to the start page", command=lambda: controller.show_frame("SplashPage"))
+        button = Button(self, text="Go to the start page", command=lambda: controller.show_frame("SplashScreen"))
         button.pack()
 
 
@@ -129,7 +131,7 @@ class PageTwo(Frame):
         self.controller = controller
         label = Label(self, text="This is page 2", font=TITLE_FONT)
         label.pack(side="top", fill="x", pady=10)
-        button = Button(self, text="Go to the start page", command=lambda: controller.show_frame("SplashPage"))
+        button = Button(self, text="Go to the start page", command=lambda: controller.show_frame("SplashScreen"))
         button.pack()
 
 
