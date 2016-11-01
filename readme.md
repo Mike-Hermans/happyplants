@@ -1,22 +1,8 @@
-#Happyplants
+# HappyPlants
+## Project setup
+- Go to ./assets
+- Install Gulp globally `npm install -g gulp`
+- Run `npm install`
+- Run `gulp`
 
-##TODO List
-
-###Priority Features
-- Link devices to planters
-- Save data to planters
-- Read data from planters
-- Control waterpumps
-
-###Other Features
-- Better error handling and checks
-- Switch devices between planters
-
-###Done
-- Scan for devices
-- Connect to device
-- Disconnect from device
-- Send command to device
-- Read command to device
-- Save device to database
-- Remove device from database
+To start the local gulp server, run `gulp watch`

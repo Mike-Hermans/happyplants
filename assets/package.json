@@ -1,0 +1,25 @@
+{
+  "name": "happyplants",
+  "version": "1.0.0",
+  "description": "Happyplants projct",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mike-Hermans/happyplants.git"
+  },
+  "author": "Mike Hermans",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mike-Hermans/happyplants/issues"
+  },
+  "homepage": "https://github.com/Mike-Hermans/happyplants#readme",
+  "devDependencies": {
+    "browser-sync": "^2.17.5",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.0.13",
+    "gulp-sass": "^2.3.2"
+  }
+}
