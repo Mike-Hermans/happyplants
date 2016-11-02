@@ -29,7 +29,7 @@ $devices = $db->get_device();
                     data-address="<?= $device['address'] ?>">
                         <div class="card-content">
                             <span class="card-title"><?= $device['name'] ?></span>
-                            <div class="row no-bottom-margin">
+                            <div class="row no-bottom-margin valign-wrapper">
                                 <div class="col s6">
                                     <?php if (count($device['data']) > 0) {
                                         ?>
@@ -43,7 +43,9 @@ $devices = $db->get_device();
                                     ?>
                                 </div>
                                 <div class="col s6">
-
+                                    <div class="card-panel">
+                                        <img src="assets/img/tomato.png" alt="tomato" class="responsive-img">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -62,8 +64,10 @@ $devices = $db->get_device();
 <footer class="page-footer transparent">
     <div class="container">
         <div class="row">
-            <a class="waves-effect waves-ligt btn blue left" id="btn-water-all" href="#">Geef water</a>
-            <a class="waves-effect waves-light btn right" href="/modules.php" id="btn-modules">Beheer modules</a>
+            <a class="waves-effect waves-ligt btn blue left col s12 m2" id="btn-water-all" href="#">Geef water</a>
+            <br class="hide-on-med-and-up">
+            <br class="hide-on-med-and-up">
+            <a class="waves-effect waves-light btn right col s12 m3" href="/modules.php" id="btn-modules">Beheer modules</a>
         </div>
     </div>
 </footer>
