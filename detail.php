@@ -56,7 +56,14 @@ $device = $db->get_device();
                 Soort groente: Tomaat
             </p>
             <p>
-                <button class="btn">Wijzig groente</button>
+                <!--<button class="btn" id="change-veg">Wijzig groente</button>-->
+                <ul id="dropdown1" class="dropdown-content">
+                    <li><a href="#">Augurk</a></li>
+                    <li><a href="#">Bloemkool</a></li>
+                    <li><a href="#">Brocolli</a></li>
+                    <li><a href="#">Courgette</a></li>
+                </ul>
+            <button class="btn dropdown-button" data-activates="dropdown1">Wijzig groente</button>
             </p>
         </div>
     </div>

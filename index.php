@@ -35,8 +35,8 @@ $devices = $db->get_device();
                                         ?>
                                         <ul class="collection">
                                             <li class="collection-item">Temp: <?= $device['data']['temp'] ?>&deg;C</li>
-                                            <li class="collection-item">Light: <?= $device['data']['moist'] ?> L</li>
-                                            <li class="collection-item">Moist: <?= $device['data']['light'] ?> cB</li>
+                                            <li class="collection-item">Licht: <?= $device['data']['moist'] ?> L</li>
+                                            <li class="collection-item">Vocht: <?= $device['data']['light'] ?> cB</li>
                                         </ul>
                                         <?php
                                     }
@@ -57,13 +57,19 @@ $devices = $db->get_device();
                 </div>
                 <?php
             }
+        } else {
+            ?>
+            <p class="flow-text">
+                Er zijn nog geen modules toegevoegd, druk op 'BEHEER MODULES' om modules te zoeken
+            </p>
+            <?php
         }
         ?>
     </div>
 </main>
 <footer class="page-footer transparent">
     <div class="container">
-        <div class="row">
+        <div class="row" style="margin-bottom: 5px">
             <a class="waves-effect waves-ligt btn blue left col s12 m2" id="btn-water-all" href="#">Geef water</a>
             <br class="hide-on-med-and-up">
             <br class="hide-on-med-and-up">

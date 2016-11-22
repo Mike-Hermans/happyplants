@@ -45,7 +45,7 @@ $devices = $db->get_device();
 </main>
 <footer class="page-footer transparent">
     <div class="container">
-        <div class="row">
+        <div class="row" style="margin-bottom: 5px">
             <a class="waves-effect waves-light btn right" href="#" id="add-modules">Voeg toe</a>
         </div>
     </div>

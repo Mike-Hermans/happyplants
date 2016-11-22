@@ -13,48 +13,50 @@ function add_modules_button() {
             command: 'scan'
         },
         success: function(data) {
-            if (data.length > 0) {
-                var ul = $("<ul></ul>").addClass("collection with-header");
-                ul.append($("<li></li>")
-                    .addClass("collection-header")
-                    .append($("<h4></h4>")
-                        .text("Gevonden modules")
-                    )
+            //if (data.length > 0) {
+            var ul = $("<ul></ul>").addClass("collection with-header");
+            ul.append($("<li></li>")
+                .addClass("collection-header")
+                .append($("<h4></h4>")
+                    .text("Gevonden modules")
                 )
-                .append($("<li></li>")
-                    .addClass("collection-item")
-                    .text("HP Module")
-                    .append($("<i></i>")
-                        .addClass("secondary-content material-icons")
-                        .text("add")
-                    )
-                    .data({
-                        'name': "HP Module",
-                        'address': '13:37:B1:FC:D1:A5'
-                    })
-                    .on("click", add_module)
-                );
-                $.each(data, function(index, value) {
+            )
+            .append($("<li></li>")
+                .addClass("collection-item")
+                .text("HP Module")
+                .append($("<i></i>")
+                    .addClass("secondary-content material-icons")
+                    .text("add")
+                )
+                .data({
+                    'name': "HP Module",
+                    'address': '13:37:B1:FC:D1:A5'
+                })
+                .on("click", add_module)
+            );
+            if (data.length > 0) {
+                $.each(data, function (index, value) {
                     ul.append(
                         $("<li></li>")
-                        .addClass("collection-item")
-                        .text(value[0])
-                        .append(
-                            $("<i></i>")
-                            .addClass("secondary-content material-icons")
-                            .text("add")
-                        )
-                        .data({
-                            'name': value[0],
-                            'address': value[1]
-                        })
-                        .on("click", add_module)
+                            .addClass("collection-item")
+                            .text(value[0])
+                            .append(
+                                $("<i></i>")
+                                    .addClass("secondary-content material-icons")
+                                    .text("add")
+                            )
+                            .data({
+                                'name': value[0],
+                                'address': value[1]
+                            })
+                            .on("click", add_module)
                     );
                 });
-                $("#found-modules").empty().append(ul);
-            } else {
-                Materialize.toast('Geen modules gevonden', 4000);
             }
+                $("#found-modules").empty().append(ul);
+            //} else {
+            //    Materialize.toast('Geen modules gevonden', 4000);
+            //}
             button.text('Voeg toe');
         },
         error: function() {
