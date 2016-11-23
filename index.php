@@ -35,8 +35,8 @@ $devices = $db->get_device();
                                         ?>
                                         <ul class="collection">
                                             <li class="collection-item"><i class="fa fa-fw fa-thermometer-three-quarters"></i> <?= $device['data']['temp'] ?>&deg;C</li>
-                                            <li class="collection-item"><i class="fa fa-fw fa-sun-o"></i> <?= $device['data']['moist'] ?> L</li>
-                                            <li class="collection-item"><i class="fa fa-fw fa-tint"></i> <?= $device['data']['light'] ?> cB</li>
+                                            <li class="collection-item"><i class="fa fa-fw fa-sun-o"></i> <?= $device['data']['moist'] / 10 ?>%</li>
+                                            <li class="collection-item"><i class="fa fa-fw fa-tint"></i> <?= $device['data']['light'] / 10?>%</li>
                                         </ul>
                                         <?php
                                     } else {
