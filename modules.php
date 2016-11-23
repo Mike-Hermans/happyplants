@@ -6,14 +6,17 @@ $devices = $db->get_device();
 <html>
 <head>
     <title>HappyPlants</title>
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="assets/css/lib/font-awesome.min.css" />
     <link type="text/css" rel="stylesheet" href="assets/css/main.css"  media="screen,projection"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/></head>
 <body>
 <header>
     <nav>
         <div class="nav-wrapper">
-            <a href="/" class="brand-logo left">< Modules</a>
+            <a href="/" class="brand-logo left">
+                <i class="fa fa-angle-left mobilefix"></i>
+                Modules
+            </a>
         </div>
     </nav>
 </header>
@@ -30,7 +33,7 @@ $devices = $db->get_device();
                             data-address="<?= $device['address'] ?>"
                             data-name="<?= $device['name'] ?>">
                             <?= $device['name'] ?>
-                            <i class="secondary-content material-icons">delete</i>
+                            <i class="secondary-content fa fa-trash-o fa-lg" style="line-height: inherit"></i>
                         </li>
                         <?php
                     }

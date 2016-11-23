@@ -53,7 +53,7 @@ function add_modules_button() {
                     );
                 });
             }
-                $("#found-modules").empty().append(ul);
+            $("#found-modules").empty().append(ul);
             //} else {
             //    Materialize.toast('Geen modules gevonden', 4000);
             //}
