@@ -5,9 +5,9 @@
 # http://www.sequelpro.com/
 # https://github.com/sequelpro/sequelpro
 #
-# Host: 127.0.0.1 (MySQL 5.5.52-0+deb8u1)
+# Host: localhost (MySQL 5.7.16)
 # Database: happyplants
-# Generation Time: 2016-11-22 07:25:21 +0000
+# Generation Time: 2016-11-23 17:29:56 +0000
 # ************************************************************
 
 
@@ -20,6 +20,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
+# Dump of table crops
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `crops`;
+
+CREATE TABLE `crops` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL DEFAULT '',
+  `nicename` varchar(45) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `crops` WRITE;
+/*!40000 ALTER TABLE `crops` DISABLE KEYS */;
+
+INSERT INTO `crops` (`id`, `name`, `nicename`)
+VALUES
+	(1,'tomato','Tomaat'),
+	(2,'maize','Maïs');
+
+/*!40000 ALTER TABLE `crops` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
 # Dump of table modules
 # ------------------------------------------------------------
 
@@ -27,18 +51,19 @@ DROP TABLE IF EXISTS `modules`;
 
 CREATE TABLE `modules` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `address` text,
-  `hp_id` tinytext,
+  `address` varchar(17) NOT NULL DEFAULT '',
+  `hp_id` varchar(64) DEFAULT '',
+  `crop` varchar(45) NOT NULL DEFAULT 'none',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 LOCK TABLES `modules` WRITE;
 /*!40000 ALTER TABLE `modules` DISABLE KEYS */;
 
-INSERT INTO `modules` (`id`, `address`, `hp_id`)
+INSERT INTO `modules` (`id`, `address`, `hp_id`, `crop`)
 VALUES
-	(12,'13:37:B1:FC:D1:A5','HP Module'),
-	(13,'98:D3:31:FC:31:A4','HC-06');
+	(12,'13:37:B1:FC:D1:A5','HP Module','tomato'),
+	(13,'98:D3:31:FC:31:A4','HC-06','maize');
 
 /*!40000 ALTER TABLE `modules` ENABLE KEYS */;
 UNLOCK TABLES;
