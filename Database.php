@@ -37,7 +37,7 @@ class Database {
                     'address' => $row['address'],
                     'data' => $this->get_device_data($row['address']),
                     'crop' => $row['crop'],
-                    'crop_nicename' => $this->get_crop_nicename($row['crop'])
+                    'crop_nicename' => $row['crop'] == 'none' ? 'Geen groente' : $this->get_crop_nicename($row['crop'])
                 );
             }
             if ($this->address != null) {

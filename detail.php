@@ -59,10 +59,10 @@ $crops = $db->get_crops();
             <table class="striped">
                 <thead>
                 <tr>
-                    <th><i class="fa fa-fw fa-clock-o"></i><span class="hide-on-small-only">Tijd</span></th>
-                    <th><i class="fa fa-fw fa-thermometer-three-quarters"></i> <span class="hide-on-small-only">Temperatuur</span></th>
-                    <th><i class="fa fa-fw fa-sun-o"></i> <span class="hide-on-small-only">Licht</span></th>
-                    <th><i class="fa fa-fw fa-tint"></i> <span class="hide-on-small-only">Vochtigheid</span></th>
+                    <th class="center-align"><i class="fa fa-fw fa-clock-o"></i><span class="hide-on-small-only">Tijd</span></th>
+                    <th class="center-align"><i class="fa fa-fw fa-thermometer-three-quarters"></i> <span class="hide-on-small-only">Temperatuur</span></th>
+                    <th class="center-align"><i class="fa fa-fw fa-sun-o"></i> <span class="hide-on-small-only">Licht</span></th>
+                    <th class="center-align"><i class="fa fa-fw fa-tint"></i> <span class="hide-on-small-only">Vochtigheid</span></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -71,10 +71,10 @@ $crops = $db->get_crops();
                     $timestamp = strtotime($data['timestamp']);
                     ?>
                     <tr>
-                        <td><?= date("H:i:s", $timestamp); ?></td>
-                        <td><?= $data['temp'] ?>&deg;C</td>
-                        <td><?= $data['light'] ?> L</td>
-                        <td><?= $data['moist'] ?> cB</td>
+                        <td class="center-align"><?= date("H:i:s", $timestamp); ?></td>
+                        <td class="center-align"><?= $data['temp'] ?>&deg;C</td>
+                        <td class="center-align"><?= $data['light']/10 ?>%</td>
+                        <td class="center-align"><?= $data['moist']/10 ?>%</td>
                     </tr>
                     <?php
                 }
