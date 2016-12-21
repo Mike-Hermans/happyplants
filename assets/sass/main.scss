@@ -42,6 +42,9 @@
 @import "components/date_picker/default.date";
 @import "components/date_picker/default.time";
 
+@import "popup";
+
+
 /*
   CUSTOM
 */
@@ -66,4 +69,12 @@ main {
 
 .mobilefix {
   line-height: inherit;
+}
+
+a.brand-logo {
+  margin-left: 10px;
+}
+
+.detail-btn {
+  margin: auto 5px;
 }

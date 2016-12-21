@@ -12,17 +12,23 @@ class Database:
                               db='happyplants')
         self.cur = self.db.cursor()
 
-    def get_btdevices(self, addr = None):
-        if addr is None:
-            self.cur.execute("SELECT * FROM modules")
-            rows = self.cur.fetchall()
-            devices = []
-            if len(rows) > 0:
-                for row in rows:
-                    devices.append([row[1], row[2]])
-            return devices
+    def get_btdevices(self):
+        self.cur.execute("SELECT * FROM modules")
+        rows = self.cur.fetchall()
+        devices = []
+        if len(rows) > 0:
+            for row in rows:
+                devices.append([row[1], row[2]])
+        return devices
 
-        return 'specific device'
+    def module_exists(self, addr):
+        self.cur.execute("SELECT id FROM modules WHERE address=%s" % addr)
+        return self.cur.rowcount
+
+    def save_data(self, data):
+        self.cur.execute("INSERT INTO sensordata (address, temp, light, moist) VALUES ('%s', '%s', '%s', '%s')" % (
+        data[0], data[1], data[2], data[3]))
+        self.db.commit()
 
     def save_btdevice(self, device):
         self.cur.execute("SELECT id FROM modules WHERE address=%s", device[1])

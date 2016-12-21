@@ -7,13 +7,16 @@ class Bluetooth:
         nearby_devices = bluetooth.discover_devices(lookup_names=True)
         devices = []
         for nearby_device in nearby_devices:
-            devices.append([nearby_device[1], nearby_device[0]])
+            name = nearby_device[1]
+            address = nearby_device[0].replace(':', '')
+            devices.append([name, address])
         return devices
 
     def connect(self, device):
         socket = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
+        address = ':'.join(str(device)[i:i+2] for i in range(0, 12, 2))
         try:
-            socket = socket.connect((device, 1))
+            socket = socket.connect((address, 1))
             return socket
         except:
             return False
@@ -27,6 +30,7 @@ class Bluetooth:
         return result
 
     def command(self, command, address):
+        address = ':'.join(str(address)[i:i + 2] for i in range(0, 12, 2))
         socket = self.connect(address)
         if socket is False:
             return [address, 'socket_invalid']

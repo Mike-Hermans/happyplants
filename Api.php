@@ -12,11 +12,18 @@ class Api {
             $this->abort();
 
         require_once "Database.php";
-        $this->db = new Database($this->address);
+        $this->db = new Database();
+
+        if ($this->address) {
+            $this->db->set_address($this->address);
+        }
 
         switch($this->endpoint) {
             case "change-crop":
                 $this->change_crop();
+                break;
+            case "remove-module":
+                $this->remove_module();
                 break;
             default:
                 $this->abort();
@@ -29,12 +36,16 @@ class Api {
         return $this->db->get_crop_nicename($crop);
     }
 
+    private function remove_module() {
+        $this->db->remove_device($this->address);
+    }
+
     private function param($p) {
         return isset($_POST[$p]) ? $_POST[$p] : false;
     }
 
     private function abort() {
-        echo "";
+        echo "abort";
         exit();
     }
 }

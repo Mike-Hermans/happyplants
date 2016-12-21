@@ -1,10 +1,54 @@
 <?php
+
+require_once('config.php');
+
 class Database {
     private $con;
     private $address;
 
-    public function __construct($address = null) {
-        $this->con = mysqli_connect('localhost', 'root', 'root', 'happyplants');
+    public function __construct() {
+        $this->con = mysqli_connect('localhost', DB_USER, DB_PASS, DB_NAME);
+    }
+
+    public function save_device($address) {
+        $address = mysqli_real_escape_string($this->con, $address);
+
+        $q = "SELECT * FROM modules WHERE address='$address'";
+
+        $result = mysqli_query($this->con, $q);
+
+        if (mysqli_num_rows($result) != 0) {
+            return false;
+        }
+
+        $q = "INSERT INTO modules(address, hp_id) VALUES('$address', 'HP Module')";
+        $result = mysqli_query($this->con, $q);
+        return $result;
+    }
+
+    public function remove_device($address) {
+        $address = mysqli_real_escape_string($this->con, $address);
+        $q = "DELETE FROM modules WHERE address='$address'";
+        mysqli_query($this->con, $q);
+    }
+
+    public function login($user, $pass) {
+        $user = mysqli_real_escape_string($this->con, $user);
+        $pass = mysqli_real_escape_string($this->con, $pass);
+
+        $q = "SELECT * FROM users WHERE user='$user' AND password='$pass'";
+        $result = mysqli_query($this->con, $q);
+
+        if ($result) {
+            $user = mysqli_fetch_assoc($result);
+            if ($user != null) {
+                return $user;
+            }
+        }
+        return false;
+    }
+
+    public function set_address($address) {
         $this->address = $address;
     }
 
@@ -21,6 +65,12 @@ class Database {
             }
         }
         return $crops;
+    }
+
+    public function set_module_name($name) {
+        $name = mysqli_escape_string($this->con, $name);
+        $q = "UPDATE modules SET hp_id='$name' WHERE address=$this->address";
+        mysqli_query($this->con, $q);
     }
 
     public function get_device() {

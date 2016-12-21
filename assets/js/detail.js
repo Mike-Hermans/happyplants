@@ -1,7 +1,9 @@
 $(document).ready(function() {
+    var module = $("main");
+    var address = module.data("address");
+    var name = module.data("name");
     $(".select-crop").on("click", function() {
         var crop = $(this).data("crop");
-        var address = $("main").data("device");
         var newcrop = $(this).text();
 
         $.ajax({
@@ -21,4 +23,24 @@ $(document).ready(function() {
             }
         });
     });
+
+    $("#change-name").on("click", function() {
+        var popup = $("#change-name-popup");
+        $("#name").val(name);
+        $("#name-label").addClass("active");
+        popup.removeClass("hidden");
+
+        $("#change-name-cancel").on("click", function() {
+            popup.addClass("hidden");
+        })
+    });
+
+    $("#remove-module").on("click", function () {
+        var popup = $("#remove-module-popup");
+        popup.removeClass("hidden");
+
+        $("#remove-module-cancel").on("click", function () {
+            popup.addClass("hidden");
+        })
+    })
 });

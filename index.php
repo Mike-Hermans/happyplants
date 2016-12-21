@@ -1,14 +1,14 @@
 <?php
-require_once('Database.php');
-$db = new Database;
-$devices = $db->get_device();
+require_once('Happyplants.php');
+$page = new Happyplants('index');
 ?>
 <html>
 <head>
     <title>HappyPlants</title>
     <link type="text/css" rel="stylesheet" href="assets/css/lib/font-awesome.min.css"/>
     <link type="text/css" rel="stylesheet" href="assets/css/main.css"  media="screen,projection"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/></head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+</head>
 <body>
 <header>
     <nav>
@@ -20,13 +20,13 @@ $devices = $db->get_device();
 <main>
     <div class="row no-bottom-margin">
         <?php
-        if (count($devices) > 0) {
-            foreach ($devices as $device) {
+        if ($page->has_devices()) {
+            foreach ($page->devices as $device) {
                 ?>
-                <div class="col s12 m6">
+                <div class="col s12 m6 l3">
                     <div class="card"
-                    data-name="<?= $device['name'] ?>"
-                    data-address="<?= $device['address'] ?>">
+                         data-name="<?= $device['name'] ?>"
+                         data-address="<?= $device['address'] ?>">
                         <div class="card-content">
                             <span class="card-title"><?= $device['name'] ?></span>
                             <div class="row no-bottom-margin valign-wrapper">
@@ -56,7 +56,6 @@ $devices = $db->get_device();
                             </div>
                         </div>
                         <div class="card-action">
-                            <a href="#" class="btn-water">Geef water</a>
                             <a href="/detail.php?a=<?= urlencode($device['address']) ?>">Meer gegevens</a>
                         </div>
                     </div>

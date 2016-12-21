@@ -14,7 +14,6 @@ class Main:
     def __init__(self):
         cgitb.enable()
         form = cgi.FieldStorage()
-        foo = form.getvalue('post_item_name', 'default_value')
         self.main(form)
 
     def main(self, form):
