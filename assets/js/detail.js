@@ -49,7 +49,6 @@ $(document).ready(function() {
 });
 
 function get_graphs(address) {
-    var canvas = $("#chart");
     $.ajax({
         dataType: "json",
         type: "POST",
@@ -70,6 +69,16 @@ function get_graphs(address) {
                             backgroundColor: "rgba(239, 83, 80, 0.6)"
                         }
                     ]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                min: 0,
+                                beginAtZero: true
+                            }
+                        }]
+                    }
                 }
             });
             var chartLight = new Chart($("#chartLight"), {
@@ -83,6 +92,16 @@ function get_graphs(address) {
                             backgroundColor: "rgba(255, 238, 88, 0.6)"
                         }
                     ]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                min: 0,
+                                beginAtZero: true
+                            }
+                        }]
+                    }
                 }
             });
             var chartMoist = new Chart($("#chartMoist"), {
@@ -96,6 +115,16 @@ function get_graphs(address) {
                             backgroundColor: "rgba(41, 182, 246, 0.6)"
                         }
                     ]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                min: 0,
+                                beginAtZero: true
+                            }
+                        }]
+                    }
                 }
             });
         }
