@@ -50,33 +50,46 @@ $crops = $page->crops;
             }
             ?>
         </div>
-        <div class="card-panel col s12 m6 offset-m1">
+        <div class="card-panel col s12 m6 offset-m1 col-no-padding">
             <div class="row">
-                <table class="striped col s12">
-                    <thead>
-                    <tr>
-                        <th class="center-align"><i class="fa fa-fw fa-clock-o"></i><span class="hide-on-small-only">Tijd</span></th>
-                        <th class="center-align"><i class="fa fa-fw fa-thermometer-three-quarters"></i> <span class="hide-on-small-only">Temperatuur</span></th>
-                        <th class="center-align"><i class="fa fa-fw fa-sun-o"></i> <span class="hide-on-small-only">Licht</span></th>
-                        <th class="center-align"><i class="fa fa-fw fa-tint"></i> <span class="hide-on-small-only">Vochtigheid</span></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                    foreach ($device['data'] as $data) {
-                        $timestamp = strtotime($data['timestamp']);
-                        ?>
+                <div class="col s12">
+                    <ul class="tabs">
+                        <li class="tab col s3"><a href="#graphs">Grafieken</a></li>
+                        <li class="tab col s3"><a href="#table">Tabel</a></li>
+                    </ul>
+                </div>
+                <div id="graphs" class="col s12">
+                    <canvas id="chartTemp"></canvas>
+                    <canvas id="chartLight"></canvas>
+                    <canvas id="chartMoist"></canvas>
+                </div>
+                <div id="table" class="col s12">
+                    <table class="striped">
+                        <thead>
                         <tr>
-                            <td class="center-align"><?= date("H:i:s", $timestamp); ?></td>
-                            <td class="center-align"><?= $data['temp'] ?>&deg;C</td>
-                            <td class="center-align"><?= $data['light']/10 ?>%</td>
-                            <td class="center-align"><?= $data['moist']/10 ?>%</td>
+                            <th class="center-align"><i class="fa fa-fw fa-clock-o"></i><span class="hide-on-small-only">Tijd</span></th>
+                            <th class="center-align"><i class="fa fa-fw fa-thermometer-three-quarters"></i> <span class="hide-on-small-only">Temperatuur</span></th>
+                            <th class="center-align"><i class="fa fa-fw fa-sun-o"></i> <span class="hide-on-small-only">Licht</span></th>
+                            <th class="center-align"><i class="fa fa-fw fa-tint"></i> <span class="hide-on-small-only">Vochtigheid</span></th>
                         </tr>
+                        </thead>
+                        <tbody>
                         <?php
-                    }
-                    ?>
-                    </tbody>
-                </table>
+                        foreach ($device['data'] as $data) {
+                            $timestamp = strtotime($data['timestamp']);
+                            ?>
+                            <tr>
+                                <td class="center-align"><?= date("H:i:s", $timestamp); ?></td>
+                                <td class="center-align"><?= $data['temp'] ?>&deg;C</td>
+                                <td class="center-align"><?= $data['light']/10 ?>%</td>
+                                <td class="center-align"><?= $data['moist']/10 ?>%</td>
+                            </tr>
+                            <?php
+                        }
+                        ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

@@ -64,7 +64,7 @@ class Happyplants
             if (isset($_POST['submit_name']) && $_POST['name'] != '') {
                 $this->db->set_module_name($_POST['name']);
             } else if (isset($_POST['remove_module'])) {
-                $this->db->remove_device($address);
+                $this->db->remove_device();
                 header("Location: /");
                 exit();
             }

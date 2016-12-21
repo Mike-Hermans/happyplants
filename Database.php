@@ -26,8 +26,8 @@ class Database {
         return $result;
     }
 
-    public function remove_device($address) {
-        $address = mysqli_real_escape_string($this->con, $address);
+    public function remove_device() {
+        $address = mysqli_real_escape_string($this->con, $this->address);
         $q = "DELETE FROM modules WHERE address='$address'";
         mysqli_query($this->con, $q);
     }
@@ -112,6 +112,27 @@ class Database {
         } else {
             return "";
         }
+    }
+
+    public function get_measurements() {
+        $q = "SELECT * FROM sensordata WHERE address='$this->address' ORDER BY `timestamp` DESC";
+        $result = mysqli_query($this->con, $q);
+        $data = array();
+        $data['timestamp'] = array();
+        $data['temp'] = array();
+        $data['light'] = array();
+        $data['moist'] = array();
+        if ($result) {
+            while($row = mysqli_fetch_assoc($result)) {
+                $data['timestamp'][] = date("H:i:s", strtotime($row['timestamp']));
+                $data['temp'][] = $row['temp'];
+                $data['light'][] = $row['light'] / 10;
+                $data['moist'][] = $row['moist'] / 10;
+            }
+        } else {
+            return "error";
+        }
+        return $data;
     }
 
     private function get_device_data($address) {

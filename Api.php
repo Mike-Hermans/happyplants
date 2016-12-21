@@ -25,9 +25,17 @@ class Api {
             case "remove-module":
                 $this->remove_module();
                 break;
+            case "get-data":
+                $this->get_data();
+                break;
             default:
                 $this->abort();
         }
+    }
+
+    private function get_data() {
+        $data = $this->db->get_measurements();
+        echo json_encode($data);
     }
 
     private function change_crop() {
@@ -37,7 +45,7 @@ class Api {
     }
 
     private function remove_module() {
-        $this->db->remove_device($this->address);
+        $this->db->remove_device();
     }
 
     private function param($p) {
