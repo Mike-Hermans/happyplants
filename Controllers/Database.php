@@ -135,6 +135,25 @@ class Database {
         return $data;
     }
 
+    public function get_markers() {
+        $q = "SELECT * FROM locations";
+        $result = mysqli_query($this->con, $q);
+
+        $data = array();
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $data[] = array(
+                    'user'      => $row['user'],
+                    'lat'       => floatval($row['lat']),
+                    'lng'       => floatval($row['lng']),
+                    'offer'     => $row['offer'],
+                    'request'   => $row['request']
+                );
+            }
+        }
+        return $data;
+    }
+
     private function get_device_data($address) {
         $q = "SELECT * FROM sensordata WHERE address='$address' ORDER BY `timestamp` DESC";
         if ($this->address == null) {

@@ -8,7 +8,7 @@ $crops = $page->crops;
 <head>
     <?php $page->get_header() ?>
 </head>
-<body>
+<body id="detail">
 <header>
     <?php $page->get_navigation($device['name']); ?>
 </header>
@@ -41,7 +41,7 @@ $crops = $page->crops;
             </ul>
             <div class="row"><button class="btn dropdown-button col s12 detail-btn" data-activates="dropdown1">Wijzig groente</button></div>
             <div class="row"><button class="btn col s12 detail-btn" id="change-name">Verander naam</button></div>
-            <div class="row"><button class="btn col s12 detail-btn red darken-3" id="remove-module">Verwijder</button></div>
+            <div class="row"><button class="btn col s12 detail-btn">Aanbieden om te ruilen</button></div>
             <?php
             }
             ?>
@@ -125,6 +125,6 @@ $crops = $page->crops;
         </div>
     </div>
 </div>
-<?php $page->get_footer(array('lib/chart.min', 'detail')); ?>
+<?php $page->get_footer(array('lib/chart', 'detail')); ?>
 </body>
 </html>

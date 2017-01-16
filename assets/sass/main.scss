@@ -5,90 +5,47 @@
 */
 // Mixins
 // @import "components/prefixer";
-@import "components/mixins";
-@import "components/color";
+@import "materialize/mixins";
+@import "materialize/color";
 
 // Variables;
-@import "components/variables";
+@import "materialize/variables";
 
 // Reset
-@import "components/normalize";
+@import "materialize/normalize";
 
 // components
-@import "components/global";
-@import "components/icons-material-design";
-@import "components/grid";
-@import "components/navbar";
-@import "components/roboto";
-@import "components/typography";
-@import "components/cards";
-@import "components/toast";
-@import "components/tabs";
-@import "components/tooltip";
-@import "components/buttons";
-@import "components/dropdown";
-@import "components/waves";
-@import "components/modal";
-@import "components/collapsible";
-@import "components/chips";
-@import "components/materialbox";
-@import "components/forms/forms";
-@import "components/table_of_contents";
-@import "components/sideNav";
-@import "components/preloader";
-@import "components/slider";
-@import "components/carousel";
-@import "components/date_picker/default";
-@import "components/date_picker/default.date";
-@import "components/date_picker/default.time";
+@import "materialize/global";
+@import "materialize/icons-material-design";
+@import "materialize/grid";
+@import "materialize/navbar";
+@import "materialize/roboto";
+@import "materialize/typography";
+@import "materialize/cards";
+@import "materialize/toast";
+@import "materialize/tabs";
+@import "materialize/tooltip";
+@import "materialize/buttons";
+@import "materialize/dropdown";
+@import "materialize/waves";
+@import "materialize/modal";
+@import "materialize/collapsible";
+@import "materialize/chips";
+@import "materialize/materialbox";
+@import "materialize/forms/forms";
+@import "materialize/table_of_contents";
+@import "materialize/sideNav";
+@import "materialize/preloader";
+@import "materialize/slider";
+@import "materialize/carousel";
+@import "materialize/date_picker/default";
+@import "materialize/date_picker/default.date";
+@import "materialize/date_picker/default.time";
 
-@import "popup";
+// Import general custom rules
+@import "components/general";
+@import "components/popup";
 
-
-/*
-  CUSTOM
-*/
-body {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-}
-
-main {
-  flex: 1 0 auto;
-  padding: 0 10px;
-}
-
-.no-bottom-margin {
-  margin-bottom: 0;
-}
-
-.col-no-padding {
-  padding: 0 !important;
-}
-
-.hidden {
-  display: none;
-}
-
-.mobilefix {
-  line-height: inherit;
-}
-
-a.brand-logo {
-  margin-left: 10px;
-}
-
-.detail-btn {
-  margin: auto 5px;
-}
-
-#graphs {
-  height: 400px;
-}
-
-#map {
-  height: 400px;
-  width: 100%;
-  margin-bottom: .75rem;
-}
+// Import page specific rules
+@import "pages/market";
+@import "pages/detail";

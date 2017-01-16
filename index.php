@@ -6,11 +6,18 @@ $page = new Happyplants('index');
 <head>
     <?php $page->get_header() ?>
 </head>
-<body>
+<body id="index">
 <header>
     <nav>
         <div class="nav-wrapper">
             <a href="/" class="brand-logo left">Happyplants</a>
+            <ul class="right">
+                <li>
+                    <a href="/modules">
+                        <i class="fa fa-fw fa-2x fa-cogs mobilefix"></i>
+                    </a>
+                </li>
+            </ul>
         </div>
     </nav>
 </header>
@@ -45,8 +52,8 @@ $page = new Happyplants('index');
                          data-address="<?= $device['address'] ?>">
                         <div class="card-content">
                             <span class="card-title"><?= $device['name'] ?></span>
-                            <div class="row no-bottom-margin valign-wrapper">
-                                <div class="col s6">
+                            <div class="row valign-wrapper">
+                                <div class="col s6 right-padding-only">
                                     <?php if (count($device['data']) > 0) {
                                         ?>
                                         <ul class="collection">
@@ -64,15 +71,17 @@ $page = new Happyplants('index');
                                     }
                                     ?>
                                 </div>
-                                <div class="col s6">
+                                <div class="col s6 left-padding-only">
                                     <div class="card-panel">
                                         <img src="assets/img/<?= $device['crop'] ?>.png" alt="<?= $device['crop'] ?>" class="responsive-img">
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card-action">
-                            <a href="/detail.php?a=<?= urlencode($device['address']) ?>">Meer gegevens</a>
+                            <div class="row no-bottom-margin">
+                                <a href="/detail?a=<?= urlencode($device['address']) ?>" class="btn col s12">
+                                    Meer gegevens
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -88,16 +97,6 @@ $page = new Happyplants('index');
         ?>
     </div>
 </main>
-<footer class="page-footer transparent">
-    <div class="container">
-        <div class="row" style="margin-bottom: 5px">
-            <a class="waves-effect waves-ligt btn blue left col s12 m2" id="btn-water-all" href="#">Geef water</a>
-            <br class="hide-on-med-and-up">
-            <br class="hide-on-med-and-up">
-            <a class="waves-effect waves-light btn right col s12 m3" href="/modules" id="btn-modules">Beheer modules</a>
-        </div>
-    </div>
-</footer>
 <?php $page->get_footer('index'); ?>
 </body>
 </html>

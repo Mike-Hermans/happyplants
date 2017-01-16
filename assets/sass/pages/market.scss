@@ -1,0 +1,51 @@
+#market {
+  #map {
+    height: 400px;
+    width: 100%;
+    margin: .75rem auto;
+
+    .infowindow {
+      max-width: 200px;
+
+      .row {
+        .col {
+          padding: 0;
+
+          img {
+            width: 100%;
+          }
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  .owned-veg {
+    img {
+      width: 100%;
+    }
+  }
+
+  .disabled {
+    filter: grayscale(100%);
+  }
+
+  .tradeoffer {
+    img {
+      width: 32px;
+      margin: auto 5px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+
+    .secondary-content {
+      position: absolute;
+      right: 5px;
+    }
+  }
+}

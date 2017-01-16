@@ -8,10 +8,10 @@ class Api {
         $this->endpoint = $this->param('endpoint');
         $this->address = $this->param('address');
 
-        if (!$this->endpoint || !$this->address)
+        if (!$this->endpoint && !$this->address)
             $this->abort();
 
-        require_once "Database.php";
+        require_once "Controllers/Database.php";
         $this->db = new Database();
 
         if ($this->address) {
@@ -27,6 +27,9 @@ class Api {
                 break;
             case "get-data":
                 $this->get_data();
+                break;
+            case "get-markers":
+                $this->get_markers();
                 break;
             default:
                 $this->abort();
@@ -46,6 +49,10 @@ class Api {
 
     private function remove_module() {
         $this->db->remove_device();
+    }
+
+    private function get_markers() {
+        echo json_encode($this->db->get_markers());
     }
 
     private function param($p) {

@@ -35,17 +35,8 @@ $(document).ready(function() {
 
         $("#change-name-cancel").on("click", function() {
             popup.addClass("hidden");
-        })
+        });
     });
-
-    $("#remove-module").on("click", function () {
-        var popup = $("#remove-module-popup");
-        popup.removeClass("hidden");
-
-        $("#remove-module-cancel").on("click", function () {
-            popup.addClass("hidden");
-        })
-    })
 });
 
 function get_graphs(address) {

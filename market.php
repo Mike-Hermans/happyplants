@@ -6,42 +6,58 @@ $page = new Happyplants('market');
 <head>
     <?php $page->get_header(); ?>
 </head>
-<body>
+<body id="market">
 <header>
     <?php $page->get_navigation('Markt'); ?>
 </header>
 <main>
     <div class="row no-bottom-margin">
-        <div class="card-panel col s12 m5">
-            <h3>Jouw groenten</h3>
-            <?php
-            foreach ($page->devices as $device) {
-                ?>
-                <img src="/assets/img/<?= $device['crop'] ?>.png" alt="" class="col s3">
-                <?php
-            }
-            ?>
+        <div class="col s12 m5">
+            <div class="card-panel">
+                <div class="row">
+                    <h3>Jouw groenten</h3>
+                    <p>Klik op een groente om te zoeken welke mensen deze groente willen hebben.</p>
+                    <span class="btn col s12 l6 offset-l3" id="show-all-btn">Laat alles zien</span>
+                </div>
+                <div class="row">
+                    <?php
+                    foreach ($page->devices as $device) {
+                        ?>
+                        <div class="owned-veg col s4 l3" data-veg="<?= $device['crop'] ?>">
+                            <img src="/assets/img/<?= $device['crop'] ?>.png" alt="">
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
+            </div>
+            <div class="card-panel statuspanel hidden">
+                <div class="row">
+                    <h3>Status</h3>
+                </div>
+                <div class="row">
+                    <ul class="collection statuscollection">
+                        <li class="collection-item hidden statusitemtemplate">
+                            <div class="tradeoffer valign-wrapper">
+                                <img src="/assets/img/#request#.png" alt="">
+                                <span>voor</span>
+                                <img src="/assets/img/#offer#.png" alt="">
+                                <span>met #user# - status: in afwachting</span>
+                                <a href="#" class="secondary-content">
+                                    <i class="fa fa-fw mobilefix fa-trash-o"></i>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
         <div class="card-panel col s12 m6 offset-m1">
             <div id="map"></div>
-            <script>
-                function initMap() {
-                    var rdm = {lat: 51.8975886, lng: 4.4185884};
-                    var map = new google.maps.Map(document.getElementById('map'), {
-                        zoom: 13,
-                        center: rdm,
-                        streetViewControl: false
-                    });
-                    var marker = new google.maps.Marker({
-                        position: rdm,
-                        map: map
-                    });
-                }
-            </script>
         </div>
     </div>
 </main>
-<?php $page->get_footer(); ?>
+<?php $page->get_footer('market'); ?>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTNSaqKB5p7uyDZAG5zhSz-kj5aWlEwlI&callback=initMap">
 </script>
