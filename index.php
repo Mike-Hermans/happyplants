@@ -1,13 +1,10 @@
 <?php
-require_once('Happyplants.php');
+require_once('Controllers/Happyplants.php');
 $page = new Happyplants('index');
 ?>
 <html>
 <head>
-    <title>HappyPlants</title>
-    <link type="text/css" rel="stylesheet" href="assets/css/lib/font-awesome.min.css"/>
-    <link type="text/css" rel="stylesheet" href="assets/css/main.css"  media="screen,projection"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <?php $page->get_header() ?>
 </head>
 <body>
 <header>
@@ -19,6 +16,25 @@ $page = new Happyplants('index');
 </header>
 <main>
     <div class="row no-bottom-margin">
+        <div class="col s12 m6 l3">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">
+                        <i class="fa fa-fw fa-balance-scale"></i>
+                        Markt
+                    </span>
+                    <div class="row no-bottom-margin">
+                        <p class="flow-text">
+                            Op de markt kun je jouw groente ruilen voor groenten van anderen.
+                        </p>
+                        <br>
+                        <a href="/market" class="btn col s12">
+                            Bekijk de markt
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <?php
         if ($page->has_devices()) {
             foreach ($page->devices as $device) {
@@ -78,13 +94,10 @@ $page = new Happyplants('index');
             <a class="waves-effect waves-ligt btn blue left col s12 m2" id="btn-water-all" href="#">Geef water</a>
             <br class="hide-on-med-and-up">
             <br class="hide-on-med-and-up">
-            <a class="waves-effect waves-light btn right col s12 m3" href="/modules.php" id="btn-modules">Beheer modules</a>
+            <a class="waves-effect waves-light btn right col s12 m3" href="/modules" id="btn-modules">Beheer modules</a>
         </div>
     </div>
 </footer>
-
-<script type="text/javascript" src="assets/js/lib/jquery.js"></script>
-<script type="text/javascript" src="assets/js/lib/materialize.js"></script>
-<script type="text/javascript" src="assets/js/index.js"></script>
+<?php $page->get_footer('index'); ?>
 </body>
 </html>

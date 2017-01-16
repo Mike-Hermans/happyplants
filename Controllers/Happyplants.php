@@ -40,6 +40,10 @@ class Happyplants
                 $this->get_modules_page();
                 break;
 
+            case 'market':
+                $this->get_market_page();
+                break;
+
             default:
                 die('help');
         }
@@ -104,6 +108,10 @@ class Happyplants
         $this->devices = $this->db->get_device();
     }
 
+    private function get_market_page() {
+        $this->devices = $this->db->get_device();
+    }
+
     private function get_param($param, $regex) {
         if (isset($_GET[$param])) {
             $p = $_GET[$param];
@@ -122,5 +130,64 @@ class Happyplants
             exit();
         }
         $this->device = $device;
+    }
+
+    /*
+     * Page template functions
+     */
+
+    /**
+     * Echoes the header
+     */
+    public function get_header() {
+    ?>
+        <title>HappyPlants</title>
+        <link type="text/css" rel="stylesheet" href="assets/css/lib/font-awesome.min.css"/>
+        <link type="text/css" rel="stylesheet" href="assets/css/main.css" media="screen,projection"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <?php
+    }
+
+    /**
+     * Requires title that gets shown in the header,
+     * optional $backurl changes the header url
+     *
+     * @param $title
+     * @param string $backurl
+     */
+    public function get_navigation($title, $backurl = '/') {
+        ?>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="<?= $backurl ?>" class="brand-logo left">
+                    <i class="fa fa-angle-left mobilefix"></i>
+                    <?= $title ?>
+                </a>
+            </div>
+        </nav>
+        <?php
+    }
+
+    /**
+     * Adds the default scripts to the page.
+     * $scripts may be a string (single script)
+     * or array (multiple scripts) to add extra.
+     *
+     * @param array|string $scripts
+     */
+    public function get_footer($scripts = array()) {
+        $default_scripts = array(
+            'lib/jquery',
+            'lib/materialize'
+        );
+
+        is_array($scripts) ?: $scripts = array($scripts);
+        $scripts = array_merge($default_scripts, $scripts);
+
+        foreach ($scripts as $script) {
+            ?>
+            <script type="text/javascript" src="/assets/js/<?= $script ?>.js"></script>
+            <?php
+        }
     }
 }

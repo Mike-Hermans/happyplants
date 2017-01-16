@@ -58,7 +58,7 @@ function get_graphs(address) {
             address: address
         },
         success: function(data) {
-            var chartTemp = new Chart($("#chartTemp"), {
+            var chart = new Chart($("#chart"), {
                 type: 'line',
                 data: {
                     labels: data.timestamp,
@@ -67,25 +67,12 @@ function get_graphs(address) {
                             label: "Temperatuur",
                             data: data.temp,
                             backgroundColor: "rgba(239, 83, 80, 0.6)"
-                        }
-                    ]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                min: 0,
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
-            });
-            var chartLight = new Chart($("#chartLight"), {
-                type: 'line',
-                data: {
-                    labels: data.timestamp,
-                    datasets: [
+                        },
+                        {
+                            label: "Vochtigheid",
+                            data: data.moist,
+                            backgroundColor: "rgba(41, 182, 246, 0.6)"
+                        },
                         {
                             label: "Licht",
                             data: data.light,
@@ -94,29 +81,7 @@ function get_graphs(address) {
                     ]
                 },
                 options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                min: 0,
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
-            });
-            var chartMoist = new Chart($("#chartMoist"), {
-                type: 'line',
-                data: {
-                    labels: data.timestamp,
-                    datasets: [
-                        {
-                            label: "Vochtigheid",
-                            data: data.moist,
-                            backgroundColor: "rgba(41, 182, 246, 0.6)"
-                        }
-                    ]
-                },
-                options: {
+                    maintainAspectRatio: false,
                     scales: {
                         yAxes: [{
                             ticks: {

@@ -1,26 +1,16 @@
 <?php
-require_once('Happyplants.php');
+require_once('Controllers/Happyplants.php');
 $page = new Happyplants('detail');
 $device = $page->device;
 $crops = $page->crops;
 ?>
 <html>
 <head>
-    <title>HappyPlants</title>
-    <link type="text/css" rel="stylesheet" href="assets/css/lib/font-awesome.min.css"/>
-    <link type="text/css" rel="stylesheet" href="assets/css/main.css" media="screen,projection"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <?php $page->get_header() ?>
 </head>
 <body>
 <header>
-    <nav>
-        <div class="nav-wrapper">
-            <a href="/" class="brand-logo left">
-                <i class="fa fa-angle-left mobilefix"></i>
-                <?= $device['name'] ?>
-            </a>
-        </div>
-    </nav>
+    <?php $page->get_navigation($device['name']); ?>
 </header>
 <main data-address="<?= $device['address'] ?>" data-name="<?= $device['name'] ?>">
     <div class="row no-bottom-margin">
@@ -31,6 +21,7 @@ $crops = $page->crops;
             </p>
             <p>
                 <?php
+                // TODO: Rebuild to form
                 if ($crops) {
                 ?>
             <ul id="dropdown1" class="dropdown-content">
@@ -38,7 +29,12 @@ $crops = $page->crops;
                 <?php
                 foreach ($crops as $crop) {
                     ?>
-                    <li><a href="#" class="select-crop" data-crop="<?= $crop['name'] ?>"><?= $crop['nicename'] ?></a></li>
+                    <li>
+                        <a href="#" class="select-crop" data-crop="<?= $crop['name'] ?>">
+                            <!--<img src="assets/img/<?/*= $crop['name'] */?>.png" alt="" class="responsive-img left">-->
+                            <?= $crop['nicename'] ?>
+                        </a>
+                    </li>
                     <?php
                 }
                 ?>
@@ -54,14 +50,12 @@ $crops = $page->crops;
             <div class="row">
                 <div class="col s12">
                     <ul class="tabs">
-                        <li class="tab col s3"><a href="#graphs">Grafieken</a></li>
-                        <li class="tab col s3"><a href="#table">Tabel</a></li>
+                        <li class="tab col s3"><a href="#graphs"><i class="fa fa-fw fa-area-chart"></i> Grafieken</a></li>
+                        <li class="tab col s3"><a href="#table"><i class="fa fa-fw fa-table"></i> Tabel</a></li>
                     </ul>
                 </div>
                 <div id="graphs" class="col s12">
-                    <canvas id="chartTemp"></canvas>
-                    <canvas id="chartLight"></canvas>
-                    <canvas id="chartMoist"></canvas>
+                    <canvas id="chart"></canvas>
                 </div>
                 <div id="table" class="col s12">
                     <table class="striped">
@@ -131,9 +125,6 @@ $crops = $page->crops;
         </div>
     </div>
 </div>
-<script type="text/javascript" src="assets/js/lib/jquery.js"></script>
-<script type="text/javascript" src="assets/js/lib/materialize.js"></script>
-<script type="text/javascript" src="assets/js/lib/chart.min.js"></script>
-<script type="text/javascript" src="assets/js/detail.js"></script>
+<?php $page->get_footer(array('lib/chart.min', 'detail')); ?>
 </body>
 </html>

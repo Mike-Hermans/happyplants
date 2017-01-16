@@ -1,6 +1,6 @@
 <?php
 
-require_once('config.php');
+require_once(dirname(__FILE__) . '/config.php');
 
 class Database {
     private $con;
@@ -115,7 +115,7 @@ class Database {
     }
 
     public function get_measurements() {
-        $q = "SELECT * FROM sensordata WHERE address='$this->address' ORDER BY `timestamp` DESC";
+        $q = "SELECT * FROM sensordata WHERE address='$this->address' ORDER BY `timestamp` DESC LIMIT 15";
         $result = mysqli_query($this->con, $q);
         $data = array();
         $data['timestamp'] = array();

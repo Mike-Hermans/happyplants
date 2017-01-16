@@ -28,7 +28,7 @@ db = Database()
 
 def manage_data(data):
     if len(data) is not 4:
-        print "ERR: invalid length (" + str(len(data)) + ")"
+        print "ERR: invalid length (" + str(len(data)) + ") [" + data + "]"
         return False
 
     if not db.module_exists(data[0]):
@@ -36,7 +36,6 @@ def manage_data(data):
         return False
 
     db.save_data(data)
-
 
 message = list("hp")
 while len(message) < 32:

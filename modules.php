@@ -1,23 +1,14 @@
 <?php
-require_once('Happyplants.php');
+require_once('Controllers/Happyplants.php');
 $page = new Happyplants('modules');
 ?>
 <html>
 <head>
-    <title>HappyPlants</title>
-    <link type="text/css" rel="stylesheet" href="assets/css/lib/font-awesome.min.css" />
-    <link type="text/css" rel="stylesheet" href="assets/css/main.css"  media="screen,projection"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/></head>
+    <?php $page->get_header(); ?>
+</head>
 <body>
 <header>
-    <nav>
-        <div class="nav-wrapper">
-            <a href="/" class="brand-logo left">
-                <i class="fa fa-angle-left mobilefix"></i>
-                Modules
-            </a>
-        </div>
-    </nav>
+    <?php $page->get_navigation('Modules'); ?>
 </header>
 <main>
     <div class="row">
@@ -62,8 +53,6 @@ $page = new Happyplants('modules');
         </div>
     </div>
 </main>
-<script type="text/javascript" src="assets/js/lib/jquery.js"></script>
-<script type="text/javascript" src="assets/js/lib/materialize.js"></script>
-<script type="text/javascript" src="assets/js/modules.js"></script>
+<?php $page->get_footer('modules'); ?>
 </body>
 </html>
