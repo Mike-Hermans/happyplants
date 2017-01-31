@@ -24,7 +24,7 @@ class Main:
 
         elif command == 'get':
             device = form.getvalue('address', None)
-            self.output(self.db.get_btdevices(device))
+            self.output(self.db.get_modules(device))
 
         elif command == 'add':
             name = form.getvalue('name', None)
@@ -35,7 +35,7 @@ class Main:
         elif command == 'command':
             comm = form.getvalue('comm', None)
             address = form.getvalue('address', None)
-            self.output(self.bt.command(comm, address))
+            self.output(self.db.set_module_command(address, comm))
 
         elif command == 'command_all':
             comm = form.getvalue('comm', 1)

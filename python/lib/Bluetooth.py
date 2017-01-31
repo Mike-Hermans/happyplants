@@ -23,7 +23,7 @@ class Bluetooth:
 
     def command_all(self, command):
         db = Database()
-        devices = db.get_btdevices()
+        devices = db.get_modules()
         result = []
         for device in devices:
             result.append(self.command(command, device[0]))

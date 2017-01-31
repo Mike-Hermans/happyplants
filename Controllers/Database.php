@@ -124,10 +124,10 @@ class Database {
         $data['moist'] = array();
         if ($result) {
             while($row = mysqli_fetch_assoc($result)) {
-                $data['timestamp'][] = date("H:i:s", strtotime($row['timestamp']));
-                $data['temp'][] = $row['temp'];
-                $data['light'][] = $row['light'] / 10;
-                $data['moist'][] = $row['moist'] / 10;
+                array_unshift($data['timestamp'], date("H:i:s", strtotime($row['timestamp'])));
+                array_unshift($data['temp'], $row['temp']);
+                array_unshift($data['light'], $row['light'] / 10);
+                array_unshift($data['moist'], $row['moist'] / 10);
             }
         } else {
             return "error";
@@ -152,6 +152,11 @@ class Database {
             }
         }
         return $data;
+    }
+
+    public function set_module_command($command) {
+        $q = "UPDATE modules SET nxt_cmd='$command' WHERE address='$this->address'";
+        mysqli_query($this->con, $q);
     }
 
     private function get_device_data($address) {

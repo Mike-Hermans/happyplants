@@ -64,13 +64,20 @@ class Happyplants
             exit();
         }
         $this->db->set_address($address);
-        if (isset($_POST['submit_name']) || isset($_POST['remove_module'])) {
+        if (isset($_POST['submit_name'])
+            || isset($_POST['remove_module'])
+            || isset($_POST['give_water']
+            )) {
             if (isset($_POST['submit_name']) && $_POST['name'] != '') {
                 $this->db->set_module_name($_POST['name']);
             } else if (isset($_POST['remove_module'])) {
                 $this->db->remove_device();
                 header("Location: /");
                 exit();
+            } else if (isset($_POST['give_water'])) {
+                //var_dump($_POST);
+                //die('w' . $_POST['water_amount'] . 'x');
+                $this->db->set_module_command('w' . $_POST['water_amount'] . 'x');
             }
         }
         $this->get_single_device();

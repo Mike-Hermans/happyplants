@@ -31,6 +31,9 @@ class Api {
             case "get-markers":
                 $this->get_markers();
                 break;
+            case "set-command":
+                $this->set_command();
+                break;
             default:
                 $this->abort();
         }
@@ -53,6 +56,11 @@ class Api {
 
     private function get_markers() {
         echo json_encode($this->db->get_markers());
+    }
+
+    private function set_command() {
+        $command = $this->param('command');
+        $this->db->set_module_command($command);
     }
 
     private function param($p) {

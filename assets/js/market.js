@@ -17,7 +17,8 @@ function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 13,
         center: rdm,
-        streetViewControl: false
+        streetViewControl: false,
+        gestureHandling: 'greedy'
     });
 
     $.ajax({
@@ -98,7 +99,7 @@ function addTrade(location) {
     var template = $('.statusitemtemplate').clone();
     template.html(template.html()
         .replace('#offer#', location.offer)
-        .replace('#request', location.request)
+        .replace('#request#', location.request)
         .replace('#user#', location.user)
     );
     template.removeClass('statusitemtemplate hidden');

@@ -11,8 +11,8 @@ $page = new Happyplants('market');
     <?php $page->get_navigation('Markt'); ?>
 </header>
 <main>
-    <div class="row no-bottom-margin">
-        <div class="col s12 m5">
+    <div class="row">
+        <div class="col s12 m6 l5">
             <div class="card-panel">
                 <div class="row">
                     <h3>Jouw groenten</h3>
@@ -52,7 +52,7 @@ $page = new Happyplants('market');
                 </div>
             </div>
         </div>
-        <div class="card-panel col s12 m6 offset-m1">
+        <div class="card-panel col s12 m6 offset-l1">
             <div id="map"></div>
         </div>
     </div>

@@ -12,13 +12,13 @@ class Database:
                               db='happyplants')
         self.cur = self.db.cursor()
 
-    def get_btdevices(self):
+    def get_modules(self):
         self.cur.execute("SELECT * FROM modules")
         rows = self.cur.fetchall()
         devices = []
         if len(rows) > 0:
             for row in rows:
-                devices.append([row[1], row[2]])
+                devices.append([row[1], row[2], row[5]])
         return devices
 
     def module_exists(self, addr):
@@ -60,3 +60,7 @@ class Database:
             for row in rows:
                 plantdata.append(row)
         return plantdata
+
+    def set_module_command(self, module, command):
+        self.cur.execute("UPDATE modules SET nxt_cmd='%s' WHERE address='%s'" % (command, module))
+        self.db.commit()

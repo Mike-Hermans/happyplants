@@ -27,8 +27,12 @@ db = Database()
 
 
 def manage_data(data):
-    if len(data) is not 4:
-        print "ERR: invalid length (" + str(len(data)) + ") [" + data + "]"
+    if len(data) is 5:
+        print "Command executed at module " + data[0]
+        if data[4] == "1":
+            db.set_module_command(data[0], 0)
+
+    elif len(data) is not 4:
         return False
 
     if not db.module_exists(data[0]):
@@ -37,30 +41,44 @@ def manage_data(data):
 
     db.save_data(data)
 
-message = list("hp")
-while len(message) < 32:
-    message.append(0)
+
+def get_messages():
+    messages = []
+    modules = db.get_modules()
+    for module in modules:
+        message = list("hp" + module[1])
+        if module[2] is not "0":
+            for c in module[2]:
+                message.append(c)
+        while len(message) < 32:
+            message.append(0)
+        messages.append(message)
+    return messages
+
 
 while 1:
-    start = time.time()
-    radio.write(message)
-    radio.startListening()
+    messages = get_messages()
+    for message in messages:
+        print message
+        start = time.time()
+        radio.write(message)
+        radio.startListening()
 
-    while not radio.available(0):
-        time.sleep(1 / 100)
-        if time.time() - start > 10:
-            break
+        while not radio.available(0):
+            time.sleep(1 / 100)
+            if time.time() - start > 5:
+                break
 
-    receivedMessage = []
-    radio.read(receivedMessage, radio.getDynamicPayloadSize())
-    #print("Received: {}".format(receivedMessage))
-    string = ""
-    for n in receivedMessage:
-        # Decode into standard unicode set
-        if (n >= 32 and n <= 126):
-            string += chr(n)
+        receivedMessage = []
+        radio.read(receivedMessage, radio.getDynamicPayloadSize())
+        #print("Received: {}".format(receivedMessage))
+        string = ""
+        for n in receivedMessage:
+            # Decode into standard unicode set
+            if (n >= 32 and n <= 126):
+                string += chr(n)
 
-    manage_data(string.split())
+        manage_data(string.split())
 
-    radio.stopListening()
-    time.sleep(1)
+        radio.stopListening()
+        time.sleep(1)

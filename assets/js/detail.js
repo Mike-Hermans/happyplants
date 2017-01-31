@@ -37,6 +37,15 @@ $(document).ready(function() {
             popup.addClass("hidden");
         });
     });
+
+    $("#give-water").on("click", function() {
+        var popup = $("#give-water-popup");
+        popup.removeClass("hidden");
+
+        $("#give-water-cancel").on("click", function() {
+            popup.addClass("hidden");
+        });
+    });
 });
 
 function get_graphs(address) {
