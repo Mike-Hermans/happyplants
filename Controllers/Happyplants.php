@@ -75,8 +75,6 @@ class Happyplants
                 header("Location: /");
                 exit();
             } else if (isset($_POST['give_water'])) {
-                //var_dump($_POST);
-                //die('w' . $_POST['water_amount'] . 'x');
                 $this->db->set_module_command('w' . $_POST['water_amount'] . 'x');
             }
         }

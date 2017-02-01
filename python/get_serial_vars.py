@@ -4,7 +4,7 @@ import serial
 import MySQLdb
 from time import sleep
 
-addr = '1337B1FCD1A5'
+addr = '03987654'
 
 ser = serial.Serial('/dev/ttyACM0', 9600)
 sleep(2)

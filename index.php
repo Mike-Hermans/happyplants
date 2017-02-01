@@ -97,6 +97,6 @@ $page = new Happyplants('index');
         ?>
     </div>
 </main>
-<?php $page->get_footer('index'); ?>
+<?php $page->get_footer(); ?>
 </body>
 </html>
